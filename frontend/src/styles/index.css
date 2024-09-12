@@ -182,7 +182,7 @@ table {
 .rectangle:after {
   content: "";
   display: block;
-  padding-bottom: 50%;
+  padding-bottom: 40%;  /* Adjust height */
 }
 
 .rectangle-content {

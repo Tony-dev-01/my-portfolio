@@ -1,7 +1,0 @@
-/* Animations */
-
-.tile-expand-animation {
-  transition: width 0.9s ease-in-out, height 0.9s ease-in-out;
-  overflow: hidden;
-  position: absolute;
-}
