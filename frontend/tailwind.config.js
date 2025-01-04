@@ -16,6 +16,10 @@ export default {
         desktop: "1280px",
         // => @media (min-width: 1280px) { ... }
       },
+      transitionTimingFunction: {
+        'ease-out-quint': 'cubic-bezier(0.22, 1, 0.36, 1)',
+        'ease-in-out-circ': 'cubic-bezier(0.85, 0, 0.15, 1)',
+      },
       keyframes: {
         fadeIn: {
           "0%": { display: "none", opacity: "0" },
@@ -37,21 +41,26 @@ export default {
         },
         tileExpand: {
           "0%": { width: '100%', height: '100%', overflow: 'hidden', position: 'absolute', zIndex: 50},
-          "100%": { width: '400px', height: '400px', overflow: 'hidden', position: 'absolute', zIndex: 50 },
+          "100%": { width: '140%', height: 'fit-content', maxHeight:'140%', overflow: 'scroll', position: 'absolute', zIndex: 50, },
         },
         tileShrink: {
-          "0%": { width: '400px', height: '400px', overflow: 'hidden', position: 'absolute', zIndex: 50},
+          "0%": {  width: '140%', height: 'fit-content', maxHeight:'140%', overflow: 'hidden', position: 'absolute', zIndex: 50},
           "99%": { width: '100%', height: '100%', overflow: 'hidden', position: 'absolute', zIndex: 50},
           "100%": { width: '100%', height: '100%', overflow: 'hidden', position: 'absolute', zIndex: 5},
-        }
+        },
+        tileSlideIn: {
+          "0%": { position: 'absolute', top: '-50px', opacity: 0, position: 'absolute'},
+          "100%": { position: 'absolute', top: '0px', opacity: 1, position: 'absolute'},
+        },
       },
       animation: {
         fadeIn: "fadeIn 800ms ease-in",
         fadeOut: "fadeOut 800ms ease-in-out",
         shrinkIn: "shrinkIn 600ms ease-in-out",
         shrinkOut: "shrinkOut 600ms ease-in-out",
-        tileExpand: "tileExpand 800ms ease-in-out",
-        tileShrink: "tileShrink 800ms ease-in-out"
+        tileExpand: "tileExpand 800ms cubic-bezier(0.65, 0, 0.35, 1)",
+        tileShrink: "tileShrink 700ms cubic-bezier(0.65, 0, 0.35, 1)",
+        tileSlideIn: "tileSlideIn 1200ms cubic-bezier(0.65, 0, 0.35, 1)",
       },
       backgroundImage: {
         'radial-gradient': 'radial-gradient(var(--tw-gradient-stops))',

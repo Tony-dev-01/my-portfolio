@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import SquareTile from "./SquareTile";
+import Loading from "./Loading";
 
 const Introduction = ({ expanded, setExpanded }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [error, setError] = useState('');
+
+  const tileRef = useRef(null);
 
   const fetchData = async () => {
     try {
@@ -32,16 +35,26 @@ const Introduction = ({ expanded, setExpanded }) => {
   useEffect(() => fetchData, []);
 
   return (
-    <SquareTile expanded={expanded} setExpanded={setExpanded} >
-      <div className="flex flex-col gap-2">
-        <h2 className="text-2xl font-bold font-sans">Introduction</h2>
-        <div className="flex flex-row justify-start items-center gap-4">
-          {loading ? 'loading image...' : <img src={data.img} className="w-12 rounded-full"/>}
-            <p>{loading ? 'loading...' : error.length > 0 ? `${error}` : 
-            data.content
-            }
+    <SquareTile expanded={expanded} setExpanded={setExpanded} data={data} loading={loading} >
+      <div className="flex flex-col gap-2" >
+        
+          {loading ? <Loading /> 
+          : error.length > 0 ? 
+          <>{error}</> 
+          :
+          <>
+          <h2 className="text-2xl font-bold font-sans">Introduction</h2>
+          <div className="flex flex-row justify-start items-start gap-4">
+          <img src={data.img} className="w-12 rounded-full"/>
+            <p> 
+            {data.content}
             </p>
-        </div>
+            <button tabIndex={expanded ? 0 : -1}>test</button>
+            <button tabIndex={expanded ? 0 : -1}>test</button>
+            </div>
+          </>
+          }
+        
       </div>
     </SquareTile>
   );

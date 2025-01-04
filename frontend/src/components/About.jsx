@@ -1,6 +1,7 @@
 import SquareTile from "./SquareTile";
 import {useState, useEffect, useRef} from 'react';
 import map from '../assets/map.png';
+import Loading from "./Loading";
 
 const About = ({expanded, setExpanded}) => {
     const [loading, setLoading] = useState(true);
@@ -35,20 +36,24 @@ const About = ({expanded, setExpanded}) => {
     useEffect(() => fetchData, []);
 
     return (
-        <SquareTile expanded={expanded} setExpanded={setExpanded} bgColor='dark'>
+        <SquareTile expanded={expanded} setExpanded={setExpanded} bgColor='dark' loading={loading}>
             <div className="flex flex-col gap-2 h-full w-full">
                 <h2 className="text-2xl font-bold font-sans text-gray-200 z-30">About</h2>
                 <div className={`h-full w-full bg-radial-gradient from-transparent to-black z-10 absolute top-0 left-0`}> </div>
                 <div className="flex flex-row gap-4">
+                    {loading ? <Loading /> :
+                <>
                 <img 
                     src={map} 
-                    className={`absolute top-0 left-0 h-full ${expanded ? 'animate-fadeOut fill-mode-forwards' : !expanded && !initialPageLoading ? 'animate-fadeIn fill-mode-forwards' : ''}`} 
+                    className={`absolute top-0 left-0 h-full ${expanded ? 'animate-fadeOut fill-mode-forwards' : !expanded ? 'animate-fadeIn fill-mode-forwards' : ''}`} 
                     onAnimationStart={() => expanded ? setShowContent(true) : setShowContent(false)}
                 />
                 
                 <div className={`flex flex-col z-10 font-sans text-sm h-full w-full ${expanded ? 'animate-fadeIn fill-mode-forwards' : 'animate-fadeOut fill-mode-forwards'}`}>
                     {showContent && <p className={`text-white relative`}>gatineau-ottawa</p>}
                 </div>
+                </>
+                }
                 </div>
             </div>
         </SquareTile>
